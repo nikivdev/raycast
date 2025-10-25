@@ -1,0 +1,71 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "flow",
+  "type": "module",
+  "title": "flow",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.19.0",
+  "description": "",
+  "author": "jinghaihan",
+  "license": "MIT",
+  "homepage": "https://github.com/nikivdev/raycast",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikivdev/raycast.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nikivdev/raycast/issues"
+  },
+  "keywords": [],
+  "icon": "icon.png",
+  "commands": [
+    {
+      "name": "index",
+      "title": "flow",
+      "description": "",
+      "mode": "view"
+    }
+  ],
+  "preferences": [],
+  "scripts": {
+    "dev": "ray develop",
+    "build": "ray build -e dist",
+    "deps": "taze major -I",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "release": "bumpp",
+    "publish": "@raycast/api publish",
+    "bootstrap": "pnpm install",
+    "prepare": "simple-git-hooks",
+    "prepublishOnly": "pnpm build"
+  },
+  "platforms": [
+    "macOS"
+  ],
+  "dependencies": {
+    "@raycast/api": "catalog:raycast",
+    "@raycast/utils": "catalog:raycast",
+    "@types/react": "catalog:types",
+    "run-applescript": "catalog:utils"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:lint",
+    "@eslint-react/eslint-plugin": "catalog:lint",
+    "@types/node": "catalog:types",
+    "bumpp": "catalog:cli",
+    "eslint": "catalog:lint",
+    "eslint-plugin-react-hooks": "catalog:lint",
+    "eslint-plugin-react-refresh": "catalog:lint",
+    "lint-staged": "catalog:lint",
+    "pncat": "catalog:cli",
+    "react": "catalog:frontend",
+    "simple-git-hooks": "catalog:lint",
+    "taze": "catalog:cli",
+    "typescript": "catalog:tsc",
+    "vitest": "catalog:test"
+  },
+  "prettier": {
+    "semi": false
+  }
+}
