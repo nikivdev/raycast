@@ -1,8 +1,8 @@
-# Raycast
+# Raycast extensions
 
-Contains various Raycast extensions I build & shared.
+Currently includes these extensions:
 
-Starting with [flow](flow).
+- [flow](flow) - catch all for various useful things starting from YouTube search with suggestions
 
 ## Contributing
 
