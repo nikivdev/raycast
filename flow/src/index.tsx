@@ -33,7 +33,28 @@ async function fetchSuggestions(query: string): Promise<string[]> {
     throw new Error(`Suggestion request failed with status ${response.status}`)
   }
 
-  const data = (await response.json()) as unknown
+  const rawPayload = (await response.text()).trim()
+  const jsonpPrefix = "window.google.ac.h("
+  const jsonpSuffix = rawPayload.endsWith(");") ? ");" : ")"
+
+  if (
+    !rawPayload.startsWith(jsonpPrefix) ||
+    !rawPayload.endsWith(jsonpSuffix)
+  ) {
+    throw new Error("Unexpected suggestion response format")
+  }
+
+  const jsonPayload = rawPayload.slice(
+    jsonpPrefix.length,
+    rawPayload.length - jsonpSuffix.length
+  )
+
+  let data: unknown
+  try {
+    data = JSON.parse(jsonPayload)
+  } catch (error) {
+    throw new Error("Failed to parse suggestion response")
+  }
 
   if (!Array.isArray(data) || data.length < 2 || !Array.isArray(data[1])) {
     return []
