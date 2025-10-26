@@ -1,25 +1,10 @@
 import { Action, ActionPanel, Icon, List } from "@raycast/api"
 import { useCachedPromise } from "@raycast/utils"
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
+import { useDebouncedValue } from "./use-debounced-value"
 
 const YOUTUBE_SUGGESTIONS_ENDPOINT =
   "https://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q="
-
-function useDebouncedValue<T>(value: T, delay: number): T {
-  const [debouncedValue, setDebouncedValue] = useState(value)
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value)
-    }, delay)
-
-    return () => {
-      clearTimeout(handler)
-    }
-  }, [value, delay])
-
-  return debouncedValue
-}
 
 async function fetchSuggestions(query: string): Promise<string[]> {
   if (!query.trim()) {

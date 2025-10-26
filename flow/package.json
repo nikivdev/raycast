@@ -21,7 +21,13 @@
   "commands": [
     {
       "name": "index",
-      "title": "flow",
+      "title": "YouTube search",
+      "description": "",
+      "mode": "view"
+    },
+    {
+      "name": "github-search",
+      "title": "GitHub search",
       "description": "",
       "mode": "view"
     }
