@@ -119,9 +119,10 @@ export default function Command() {
             accessories={[{ text: "Search YouTube" }]}
             actions={
               <ActionPanel>
-                <Action.OpenInBrowser
-                  url={getYouTubeSearchUrl(searchText)}
-                  title="Open in Browser"
+                <Action.Open
+                  target={getYouTubeSearchUrl(searchText)}
+                  application="Dia"
+                  title="Open in Dia"
                 />
               </ActionPanel>
             }
@@ -149,9 +150,10 @@ export default function Command() {
               icon={Icon.Text}
               actions={
                 <ActionPanel>
-                  <Action.OpenInBrowser
-                    url={getYouTubeSearchUrl(suggestion)}
-                    title="Open in Browser"
+                  <Action.Open
+                    target={getYouTubeSearchUrl(suggestion)}
+                    application="Dia"
+                    title="Open in Dia"
                   />
                 </ActionPanel>
               }
