@@ -1,46 +1,66 @@
-import { Action, ActionPanel, Icon, List } from "@raycast/api";
-import { useCachedPromise, useDebouncedValue } from "@raycast/utils";
-import { useState } from "react";
+import { Action, ActionPanel, Icon, List } from "@raycast/api"
+import { useCachedPromise } from "@raycast/utils"
+import React, { useEffect, useState } from "react"
 
 const YOUTUBE_SUGGESTIONS_ENDPOINT =
-  "https://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=";
+  "https://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q="
+
+function useDebouncedValue<T>(value: T, delay: number): T {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value)
+    }, delay)
+
+    return () => {
+      clearTimeout(handler)
+    }
+  }, [value, delay])
+
+  return debouncedValue
+}
 
 async function fetchSuggestions(query: string): Promise<string[]> {
   if (!query.trim()) {
-    return [];
+    return []
   }
 
-  const response = await fetch(`${YOUTUBE_SUGGESTIONS_ENDPOINT}${encodeURIComponent(query)}`);
+  const response = await fetch(
+    `${YOUTUBE_SUGGESTIONS_ENDPOINT}${encodeURIComponent(query)}`
+  )
   if (!response.ok) {
-    throw new Error(`Suggestion request failed with status ${response.status}`);
+    throw new Error(`Suggestion request failed with status ${response.status}`)
   }
 
-  const data = (await response.json()) as unknown;
+  const data = (await response.json()) as unknown
 
   if (!Array.isArray(data) || data.length < 2 || !Array.isArray(data[1])) {
-    return [];
+    return []
   }
 
   return (data[1] as unknown[])
     .map((item) => {
       if (typeof item === "string") {
-        return item;
+        return item
       }
       if (Array.isArray(item) && typeof item[0] === "string") {
-        return item[0];
+        return item[0]
       }
-      return undefined;
+      return undefined
     })
-    .filter((item): item is string => Boolean(item));
+    .filter((item): item is string => Boolean(item))
 }
 
 function getYouTubeSearchUrl(term: string) {
-  return `https://www.youtube.com/results?search_query=${encodeURIComponent(term)}`;
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(
+    term
+  )}`
 }
 
 export default function Command() {
-  const [searchText, setSearchText] = useState("");
-  const debouncedSearch = useDebouncedValue(searchText, 250);
+  const [searchText, setSearchText] = useState("")
+  const debouncedSearch = useDebouncedValue(searchText, 250)
 
   const {
     data: suggestions = [],
@@ -49,10 +69,10 @@ export default function Command() {
   } = useCachedPromise(fetchSuggestions, [debouncedSearch], {
     execute: debouncedSearch.trim().length > 0,
     keepPreviousData: true,
-  });
+  })
 
-  const hasSuggestions = suggestions.length > 0;
-  const hasSearchText = searchText.trim().length > 0;
+  const hasSuggestions = suggestions.length > 0
+  const hasSearchText = searchText.trim().length > 0
 
   return (
     <List
@@ -62,7 +82,11 @@ export default function Command() {
       searchText={searchText}
     >
       {!hasSearchText && (
-        <List.EmptyView icon={Icon.MagnifyingGlass} title="Search YouTube" description="Start typing to see suggestions" />
+        <List.EmptyView
+          icon={Icon.MagnifyingGlass}
+          title="Search YouTube"
+          description="Start typing to see suggestions"
+        />
       )}
 
       {hasSearchText && (
@@ -74,7 +98,10 @@ export default function Command() {
             accessories={[{ text: "Search YouTube" }]}
             actions={
               <ActionPanel>
-                <Action.OpenInBrowser url={getYouTubeSearchUrl(searchText)} title="Open in Browser" />
+                <Action.OpenInBrowser
+                  url={getYouTubeSearchUrl(searchText)}
+                  title="Open in Browser"
+                />
               </ActionPanel>
             }
           />
@@ -101,7 +128,10 @@ export default function Command() {
               icon={Icon.Text}
               actions={
                 <ActionPanel>
-                  <Action.OpenInBrowser url={getYouTubeSearchUrl(suggestion)} title="Open in Browser" />
+                  <Action.OpenInBrowser
+                    url={getYouTubeSearchUrl(suggestion)}
+                    title="Open in Browser"
+                  />
                 </ActionPanel>
               }
             />
@@ -109,5 +139,5 @@ export default function Command() {
         </List.Section>
       )}
     </List>
-  );
+  )
 }
