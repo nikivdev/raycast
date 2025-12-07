@@ -30,6 +30,18 @@
       "title": "GitHub search",
       "description": "",
       "mode": "view"
+    },
+    {
+      "name": "fork-internal-search",
+      "title": "Fork Internal Search",
+      "description": "Browse local git repositories inside ~/fork-i",
+      "mode": "view"
+    },
+    {
+      "name": "hn-search",
+      "title": "HN Search",
+      "description": "Search through top Hacker News posts",
+      "mode": "view"
     }
   ],
   "preferences": [],

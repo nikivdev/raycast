@@ -17,6 +17,10 @@ declare namespace Preferences {
   export type Index = ExtensionPreferences & {}
   /** Preferences accessible in the `github-search` command */
   export type GithubSearch = ExtensionPreferences & {}
+  /** Preferences accessible in the `fork-internal-search` command */
+  export type ForkInternalSearch = ExtensionPreferences & {}
+  /** Preferences accessible in the `hn-search` command */
+  export type HnSearch = ExtensionPreferences & {}
 }
 
 declare namespace Arguments {
@@ -24,5 +28,9 @@ declare namespace Arguments {
   export type Index = {}
   /** Arguments passed to the `github-search` command */
   export type GithubSearch = {}
+  /** Arguments passed to the `fork-internal-search` command */
+  export type ForkInternalSearch = {}
+  /** Arguments passed to the `hn-search` command */
+  export type HnSearch = {}
 }
 

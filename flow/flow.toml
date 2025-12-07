@@ -1,0 +1,42 @@
+version = 1
+name = "search"
+
+[deps]
+fast = "github.com/1focus-ai/fast"
+
+[[tasks]]
+name = "setup"
+command = "pnpm install"
+description = "Install dependencies"
+
+[[tasks]]
+name = "dev"
+command = "pnpm dev"
+description = "Start Raycast dev mode"
+
+[[tasks]]
+name = "build"
+command = "pnpm build"
+description = "Build extension for production"
+
+[[tasks]]
+name = "lint"
+command = "pnpm lint"
+description = "Run ESLint"
+
+[[tasks]]
+name = "typecheck"
+command = "pnpm typecheck"
+description = "Run TypeScript type checking"
+
+[[tasks]]
+name = "install"
+command = "pnpm build && open -a Raycast dist"
+description = "Build and install extension to Raycast"
+
+[[tasks]]
+name = "commit"
+command = "fast commitPush"
+description = "Commit with AI"
+dependencies = ["fast"]
+delegate_to_hub = true
