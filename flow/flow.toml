@@ -1,9 +1,6 @@
 version = 1
 name = "search"
 
-[deps]
-fast = "github.com/1focus-ai/fast"
-
 [[tasks]]
 name = "setup"
 command = "pnpm install"
@@ -33,10 +30,3 @@ description = "Run TypeScript type checking"
 name = "install"
 command = "pnpm build && open -a Raycast dist"
 description = "Build and install extension to Raycast"
-
-[[tasks]]
-name = "commit"
-command = "fast commitPush"
-description = "Commit with AI"
-dependencies = ["fast"]
-delegate_to_hub = true

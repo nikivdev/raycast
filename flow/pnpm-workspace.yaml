@@ -1,29 +1,29 @@
 packages: []
 catalogs:
   cli:
-    bumpp: ^10.3.1
-    pncat: ^0.7.3
-    taze: ^19.8.1
+    bumpp: ^10.3.2
+    pncat: ^0.7.7
+    taze: ^19.9.2
   frontend:
-    react: ^19.2.0
+    react: ^19.2.1
   lint:
-    '@antfu/eslint-config': ^6.0.0
-    '@eslint-react/eslint-plugin': ^2.2.3
-    eslint: ^9.38.0
+    '@antfu/eslint-config': ^6.4.2
+    '@eslint-react/eslint-plugin': ^2.3.12
+    eslint: ^9.39.1
     eslint-plugin-react-hooks: ^7.0.1
     eslint-plugin-react-refresh: ^0.4.24
-    lint-staged: ^16.2.6
+    lint-staged: ^16.2.7
     simple-git-hooks: ^2.13.1
   raycast:
-    '@raycast/api': ^1.103.4
-    '@raycast/utils': ^2.2.1
+    '@raycast/api': ^1.103.10
+    '@raycast/utils': ^2.2.2
   test:
-    vitest: ^4.0.3
+    vitest: ^4.0.15
   tsc:
     typescript: ^5.9.3
   types:
-    '@types/node': ^24.9.1
-    '@types/react': ^19.2.2
+    '@types/node': ^24.10.1
+    '@types/react': ^19.2.7
   utils:
     run-applescript: ^7.1.0
 onlyBuiltDependencies:
